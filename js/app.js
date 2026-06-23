@@ -13,3 +13,22 @@ for (let i = 0; i < 50; i++) {
 
     particles.appendChild(dot);
 }
+const sendBtn = document.getElementById("sendBtn");
+const userInput = document.getElementById("userInput");
+const chatBox = document.querySelector(".chat-box");
+
+if (sendBtn) {
+    sendBtn.addEventListener("click", () => {
+
+        const message = userInput.value.trim();
+
+        if (!message) return;
+
+        const userMessage = document.createElement("p");
+        userMessage.innerHTML = "<strong>You:</strong> " + message;
+
+        chatBox.appendChild(userMessage);
+
+        userInput.value = "";
+    });
+}
