@@ -130,3 +130,19 @@ body{
         background-position:200% center;
     }
 }
+.chat-box{
+    width:90%;
+    max-width:800px;
+    margin:20px auto;
+    padding:20px;
+
+    background:rgba(255,255,255,0.08);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    min-height:200px;
+
+    text-align:left;
+}
