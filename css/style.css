@@ -50,7 +50,20 @@ body{
 .logo{
     font-size:4rem;
     font-weight:bold;
-    text-shadow:0 0 20px #00ffff;
+
+    background: linear-gradient(
+        90deg,
+        #00ffff,
+        #7c3aed,
+        #00ffff
+    );
+
+    background-size:200% auto;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation: glowMove 4s linear infinite;
 }
 
 .tagline{
@@ -105,5 +118,15 @@ body{
     100% {
         transform: translateY(-200px);
         opacity: 0;
+    }
+}
+
+@keyframes glowMove{
+    0%{
+        background-position:0% center;
+    }
+
+    100%{
+        background-position:200% center;
     }
 }
