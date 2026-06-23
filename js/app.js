@@ -29,6 +29,17 @@ if (sendBtn) {
 
         chatBox.appendChild(userMessage);
 
-        userInput.value = "";
+setTimeout(() => {
+
+    const aiMessage = document.createElement("p");
+
+    aiMessage.innerHTML =
+        "<strong>SAGE AI:</strong> I received: " + message;
+
+    chatBox.appendChild(aiMessage);
+
+}, 800);
+
+userInput.value = "";
     });
 }
