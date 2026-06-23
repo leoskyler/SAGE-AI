@@ -33,8 +33,23 @@ setTimeout(() => {
 
     const aiMessage = document.createElement("p");
 
-    aiMessage.innerHTML =
-        "<strong>SAGE AI:</strong> I received: " + message;
+   let reply = "";
+
+if (message.toLowerCase().includes("hello")) {
+    reply = "Hello! I am SAGE AI. How can I help you today?";
+} 
+else if (message.toLowerCase().includes("who are you")) {
+    reply = "I am SAGE AI, your futuristic assistant built for learning and creation.";
+} 
+else if (message.toLowerCase().includes("help")) {
+    reply = "Sure! You can ask me anything or try uploading an image later.";
+} 
+else {
+    reply = "I understand: " + message;
+}
+
+aiMessage.innerHTML = "<strong>SAGE AI:</strong> " + reply; 
+        
 
     chatBox.appendChild(aiMessage);
 
