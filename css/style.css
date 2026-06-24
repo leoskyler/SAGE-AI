@@ -613,3 +613,73 @@ body::after{
 #sendBtn:hover{
     transform:scale(1.08);
 }
+/* =========================
+   WELCOME SCREEN V2
+========================= */
+
+.welcome-section{
+    margin-top:30px;
+    margin-bottom:60px;
+}
+
+.welcome-section h2{
+    font-size:28px;
+    font-weight:600;
+    margin-top:20px;
+    margin-bottom:8px;
+}
+
+.welcome-section p{
+    font-size:16px;
+    opacity:.7;
+}
+
+/* STAR WITH GLOW RINGS */
+
+.sage-star{
+    position:relative;
+
+    width:110px;
+    height:110px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    font-size:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(80,100,255,.08);
+
+    box-shadow:
+        0 0 30px rgba(0,150,255,.2);
+}
+
+.sage-star::before{
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(120,180,255,.15);
+}
+
+.sage-star::after{
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(170,100,255,.12);
+}
