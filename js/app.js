@@ -90,13 +90,11 @@ ${memory.lastMessages.slice(-5).join("\n")}
 
 Instructions:
 - Use conversation history to answer properly
-- If user mentions name, remember it
-- If user says "my name is X", extract and remember it inside your response
+- If user says "my name is X", extract and store it in memory.name
 - Be natural and conversational
 `
     }
 ];
-
     
     if (selectedImageBase64) {
         parts.push({
