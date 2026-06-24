@@ -109,5 +109,30 @@ sendBtn.addEventListener("click", () => {
     addMessage(text, "user");
     input.value = "";
 
-    botReply(text);
+    botReply(text);function generateReply(text) {
+    const msg = text.toLowerCase().trim();
+
+    // greetings
+    if (msg.includes("hello") || msg.includes("hi")) {
+        return "Hello 👋 I am SAGE AI. How can I help you today?";
+    }
+
+    // identity
+    if (msg.includes("who are you")) {
+        return "I am SAGE AI, your personal assistant built to help you.";
+    }
+
+    // time
+    if (msg.includes("time")) {
+        return "Current time is: " + new Date().toLocaleTimeString();
+    }
+
+    // date
+    if (msg.includes("date") || msg.includes("day")) {
+        return "Today is " + new Date().toDateString();
+    }
+
+    // default fallback
+    return "I’m still learning 🤖. Try asking me something else!";
+    }
 });
