@@ -168,10 +168,7 @@ if (memory.lastMessages.length > 10) {
 
 saveMemory();
 
-    const loadingMsg = document.createElement("div");
-    loadingMsg.classList.add("message", "ai");
-    loadingMsg.textContent = "SAGE is thinking...";
-    chatBox.appendChild(loadingMsg);
+    const loadingMsg = showTyping();
 
     try {
         const reply = await generateReply(text);
