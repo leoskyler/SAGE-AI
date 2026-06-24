@@ -1,22 +1,25 @@
-const imageInput = document.getElementById("imageInput");
-let selectedImageBase64 = null;
-
-imageInput.addEventListener("change", function () {
-    const file = imageInput.files[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function () {
-        selectedImageBase64 = reader.result.split(",")[1];
-    };
-
-    reader.readAsDataURL(file);
-});
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
+
+/* ---------------- IMAGE INPUT ---------------- */
+const imageInput = document.getElementById("imageInput");
+let selectedImageBase64 = null;
+
+if (imageInput) {
+    imageInput.addEventListener("change", function () {
+        const file = imageInput.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            selectedImageBase64 = reader.result.split(",")[1];
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
 
 /* ---------------- MESSAGE SYSTEM ---------------- */
 function addMessage(text, type){
@@ -60,13 +63,13 @@ function speak(text){
 }
 
 /* ---------------- GEMINI AI ---------------- */
-async async function generateReply(text) {
+async function generateReply(text) {
 
     const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
     let parts = [
         {
-            text: "You are SAGE AI. Describe images and answer clearly."
+            text: "You are SAGE AI. You can describe images and answer clearly."
         }
     ];
 
@@ -111,9 +114,9 @@ async async function generateReply(text) {
 /* ---------------- SEND MESSAGE ---------------- */
 async function sendMessage(){
     const text = input.value.trim();
-    if (!text) return;
+    if (!text && !selectedImageBase64) return;
 
-    addMessage(text, "user");
+    addMessage(text || "📷 Image sent", "user");
     input.value = "";
 
     const loadingMsg = document.createElement("div");
