@@ -1,3 +1,15 @@
+let memory = {
+    name: null,
+    lastMessages: []
+};
+
+// load saved memory
+if (localStorage.getItem("sageMemory")) {
+    memory = JSON.parse(localStorage.getItem("sageMemory"));
+}
+function saveMemory() {
+    localStorage.setItem("sageMemory", JSON.stringify(memory));
+}
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
@@ -118,6 +130,14 @@ async function sendMessage(){
 
     addMessage(text || "📷 Image sent", "user");
     input.value = "";
+    memory.lastMessages.push(text);
+
+// keep only last 10 messages
+if (memory.lastMessages.length > 10) {
+    memory.lastMessages.shift();
+}
+
+saveMemory();
 
     const loadingMsg = document.createElement("div");
     loadingMsg.classList.add("message", "ai");
