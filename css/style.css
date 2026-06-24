@@ -157,3 +157,25 @@ body::after{
     color:white;
     cursor:pointer;
 }
+.message{
+    max-width:75%;
+    padding:10px 14px;
+    margin:8px 0;
+    border-radius:15px;
+    line-height:1.4;
+    word-wrap:break-word;
+}
+
+.user{
+    background:#00aaff;
+    color:white;
+    margin-left:auto;
+    border-bottom-right-radius:5px;
+}
+
+.ai{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);
+    margin-right:auto;
+    border-bottom-left-radius:5px;
+}
