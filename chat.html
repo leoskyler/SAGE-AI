@@ -1,84 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SAGE AI</title>
+
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="particles"></div>
+<div class="background-glow"></div>
 
 <div class="container">
 
-    <div class="logo">
-        SAGE <span>AI</span>
-    </div>
+    <!-- HEADER -->
+    <div class="hero">
 
-    <div class="tagline">
-        Ask anything...
-    </div>
+        <h1 class="logo">
+            SAGE <span>AI</span>
+        </h1>
 
-    <button id="loginBtn">
-        <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            class="google-icon"
-            alt="Google">
-        Sign in with Google
-    </button>
+        <p class="tagline">
+            Ask anything...
+        </p>
 
-    <div class="sage-orb">
-        <div class="ring ring1"></div>
-        <div class="ring ring2"></div>
+        <!-- GOOGLE LOGIN -->
+        <button id="loginBtn" class="login-btn">
 
-        <div class="sage-center">
-            ✦
+            <img
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google"
+                class="google-icon">
+
+            <span>Sign in with Google</span>
+
+        </button>
+
+        <!-- SAGE ORB -->
+        <div class="sage-orb">
+
+            <div class="orb-ring ring1"></div>
+            <div class="orb-ring ring2"></div>
+
+            <div class="orb-core">
+
+                <div class="orb-symbol">
+                    S
+                </div>
+
+            </div>
+
         </div>
+
+        <!-- WELCOME -->
+        <div class="welcome">
+
+            <h2>
+                Hello! I'm <span>SAGE AI</span>
+            </h2>
+
+            <p>
+                How can I help you today?
+            </p>
+
+        </div>
+
+        <!-- SUGGESTIONS -->
+        <div class="suggestions" id="suggestions">
+
+            <button class="suggestion-btn">
+                💡 Explain quantum computing
+            </button>
+
+            <button class="suggestion-btn">
+                &lt;/&gt; Write Python code
+            </button>
+
+            <button class="suggestion-btn">
+                📊 Analyze this data
+            </button>
+
+        </div>
+
     </div>
 
-    <div class="welcome">
-        <h1>Hello! I'm <span>SAGE AI</span></h1>
-        <p>How can I help you today?</p>
-    </div>
-
-    <div class="suggestions">
-
-        <button class="suggestion-btn">
-            💡 Explain quantum computing
-        </button>
-
-        <button class="suggestion-btn">
-            &lt;/&gt; Write Python code
-        </button>
-
-        <button class="suggestion-btn">
-            📊 Analyze this data
-        </button>
-
-    </div>
-
+    <!-- CHAT AREA -->
     <div class="chat-box" id="chatBox"></div>
 
-    <input
-        type="file"
-        id="imageInput"
-        accept="image/*,.pdf,.doc,.docx,.txt"
-        hidden
-    >
+</div>
+
+<!-- FILE INPUT -->
+<input
+    type="file"
+    id="imageInput"
+    accept="image/*"
+    hidden
+>
+
+<!-- INPUT BAR -->
+<div class="input-container">
+
+    <button
+        class="action-btn"
+        onclick="document.getElementById('imageInput').click()">
+        +
+    </button>
+
+    <button
+        class="action-btn"
+        onclick="startVoiceInput()">
+        🎤
+    </button>
 
     <div class="input-wrapper">
-
-        <button id="voiceBtn">🎤</button>
 
         <input
             id="userInput"
             type="text"
             placeholder="Type your message..."
-        >
+            autocomplete="off">
 
-        <button id="sendBtn">➤</button>
+        <button id="sendBtn">
+            ➤
+        </button>
 
     </div>
 
@@ -88,4 +135,5 @@
 <script type="module" src="js/firebase.js"></script>
 
 </body>
+
 </html>
