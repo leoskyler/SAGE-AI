@@ -3,109 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAGE AI Chat</title>
+<title>SAGE AI</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="particles"></div>
+
+<div class="particles"></div>
 
 <div class="container">
 
     <div class="logo">
-    SAGE AI
-</div>
-
-<button id="loginBtn">
-    <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        alt="Google"
-        class="google-icon"
-    >
-    Sign in with Google
-</button>
-<div class="tagline">
-    Ask anything...
-</div>
-<div class="sage-orb"></div>
-
-<div class="welcome">
-    <h1>Hello! I'm <span>SAGE AI</span></h1>
-    <p>How can I help you today?</p>
-</div>
-<!-- Welcome Section -->
-
-<div class="welcome-section">
-
-    <div class="sage-star">
-        ✦
+        SAGE <span>AI</span>
     </div>
 
-    <h2>
-        Hello! I'm <span>SAGE AI</span>
-    </h2>
+    <div class="tagline">
+        Ask anything...
+    </div>
 
-    <p>
-        How can I help you today?
-    </p>
-
-</div>
-
-<!-- Suggestions -->
-
-<div class="suggestions">
-
-    <button class="suggestion-btn">
-        💡 Explain quantum computing
+    <button id="loginBtn">
+        <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            class="google-icon"
+            alt="Google">
+        Sign in with Google
     </button>
 
-    <button class="suggestion-btn">
-        &lt;/&gt; Write Python code
-    </button>
+    <div class="sage-orb">
+        <div class="ring ring1"></div>
+        <div class="ring ring2"></div>
 
-    <button class="suggestion-btn">
-        📊 Analyze this data
-    </button>
+        <div class="sage-center">
+            ✦
+        </div>
+    </div>
 
-</div>
+    <div class="welcome">
+        <h1>Hello! I'm <span>SAGE AI</span></h1>
+        <p>How can I help you today?</p>
+    </div>
 
-<!-- Hidden chat area -->
+    <div class="suggestions">
 
-<div class="chat-box" id="chatBox" style="display:none;"></div>
+        <button class="suggestion-btn">
+            💡 Explain quantum computing
+        </button>
 
-<!-- Hidden Upload Input -->
+        <button class="suggestion-btn">
+            &lt;/&gt; Write Python code
+        </button>
 
-<input
-    type="file"
-    id="imageInput"
-    accept="image/*,.pdf,.doc,.docx,.txt"
-    style="display:none;"
->
+        <button class="suggestion-btn">
+            📊 Analyze this data
+        </button>
 
-<!-- Bottom Bar -->
+    </div>
 
-<div class="input-wrapper">
-
-    <button id="plusBtn">
-    ✚
-    </button>
-
-    <button id="voiceBtn" onclick="startVoiceInput()">
-        🎤
-    </button>
+    <div class="chat-box" id="chatBox"></div>
 
     <input
-        id="userInput"
-        type="text"
-        placeholder="Type your message..."
+        type="file"
+        id="imageInput"
+        accept="image/*,.pdf,.doc,.docx,.txt"
+        hidden
     >
 
-    <button id="sendBtn">
-        ➤
-    </button>
+    <div class="input-wrapper">
 
-</div>
-    
+        <button id="voiceBtn">🎤</button>
+
+        <input
+            id="userInput"
+            type="text"
+            placeholder="Type your message..."
+        >
+
+        <button id="sendBtn">➤</button>
+
+    </div>
+
 </div>
 
 <script src="js/app.js"></script>
