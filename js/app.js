@@ -69,7 +69,7 @@ async function generateReply(text) {
 
     let parts = [
         {
-            text: "You are SAGE AI. You can describe images and answer clearly."
+            text: "You are SAGE AI. You can analyze images and answer clearly."
         }
     ];
 
