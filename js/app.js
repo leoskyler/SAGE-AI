@@ -198,28 +198,11 @@ input.addEventListener("keypress", (e) => {
 
 /* GLOBAL */
 window.startVoiceInput = startVoiceInput;
-window.addEventListener("load", () => {
-    if (memory.name) {
-        addMessage(
-            `Welcome back ${memory.name} 👋 I remember you.`,
-            "ai"
-        );
-        speak(`Welcome back ${memory.name}. I remember you.`);
-    } else {
-        addMessage(
-            "Hello 👋 I am SAGE AI. What is your name?",
-            "ai"
-        );
-    }
 
-    // show last session preview (optional but powerful)
-    if (memory.lastMessages.length > 0) {
-        addMessage(
-            "I also remember our last conversation 👍",
-            "ai"
-        );
-    }
+window.addEventListener("load", () => {
+    // Welcome screen only
 });
+
 function showTyping() {
     const loadingMsg = document.createElement("div");
     loadingMsg.classList.add("message", "ai");
