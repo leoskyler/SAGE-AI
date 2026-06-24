@@ -14,6 +14,13 @@ if (SpeechRecognition) {
         input.value = transcript;
     };
 }
+function startVoiceInput(){
+    if (recognition) {
+        recognition.start();
+    } else {
+        alert("Voice input is not supported in this browser.");
+    }
+}
 /* ---------------- MESSAGE SYSTEM ---------------- */
 function addMessage(text, type){
     const msg = document.createElement("div");
