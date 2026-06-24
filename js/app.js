@@ -218,3 +218,20 @@ window.addEventListener("load", () => {
         );
     }
 });
+function showTyping() {
+    const loadingMsg = document.createElement("div");
+    loadingMsg.classList.add("message", "ai");
+
+    loadingMsg.innerHTML = `
+        <div class="typing">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    `;
+
+    chatBox.appendChild(loadingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    return loadingMsg;
+}
