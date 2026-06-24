@@ -1,7 +1,3 @@
-/* =========================
-   GLOBAL
-========================= */
-
 *{
     margin:0;
     padding:0;
@@ -9,333 +5,197 @@
 }
 
 body{
+    font-family:Arial,sans-serif;
     min-height:100vh;
+    background:
+    radial-gradient(circle at center,#08113d,#020616);
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    font-family:Arial, sans-serif;
-
-    background:
-    radial-gradient(circle at top,#0b1035,#030615);
-
-    color:white;
-
     overflow:hidden;
-
-    position:relative;
 }
 
-/* =========================
-   FLOATING GLOW PARTICLES
-========================= */
+/* Background particles */
 
-body::before,
-body::after{
+body::before{
     content:"";
     position:fixed;
     inset:0;
-
     background:
-    radial-gradient(circle,
-    rgba(0,180,255,.2) 2px,
-    transparent 3px);
-
-    background-size:120px 120px;
-
-    animation:floatParticles 35s linear infinite;
-
+    radial-gradient(circle,#3f8cff 2px,transparent 3px);
+    background-size:140px 140px;
+    opacity:.4;
     z-index:0;
 }
 
-body::after{
-    animation-direction:reverse;
-    opacity:.4;
-}
-
-@keyframes floatParticles{
-    from{
-        transform:translateY(0);
-    }
-
-    to{
-        transform:translateY(-400px);
-    }
-}
-
-/* =========================
-   MAIN CARD
-========================= */
+/* Main panel */
 
 .container{
     position:relative;
     z-index:2;
 
-    width:min(92%,420px);
-
-    height:88vh;
-
-    max-height:900px;
-
-    padding:25px;
-
-    border-radius:40px;
+    width:min(95%,420px);
+    height:90vh;
 
     display:flex;
     flex-direction:column;
+    align-items:center;
 
-    justify-content:space-between;
+    padding:24px;
+
+    border-radius:40px;
 
     background:
-    rgba(5,10,40,.75);
-
-    backdrop-filter:blur(25px);
+    rgba(0,5,40,.72);
 
     border:2px solid rgba(140,120,255,.6);
 
     box-shadow:
-    0 0 30px rgba(0,170,255,.4),
-    0 0 60px rgba(170,0,255,.25);
+    0 0 25px #1e90ff,
+    0 0 60px #8a2be2;
 }
 
-/* =========================
-   LOGO
-========================= */
+/* Logo */
 
 .logo{
-    text-align:center;
-
-    font-size:52px;
-
-    font-weight:700;
-
-    margin-top:5px;
+    font-size:60px;
+    font-weight:900;
+    letter-spacing:2px;
 
     text-shadow:
     0 0 15px #00aaff,
     0 0 40px #00aaff;
 }
 
-/* =========================
-   GOOGLE BUTTON
-========================= */
-
-#loginBtn{
-    width:100%;
-
-    margin-top:20px;
-
-    border:none;
-
-    border-radius:22px;
-
-    padding:16px;
-
-    background:white;
-
-    color:#111;
-
-    font-size:20px;
-
-    font-weight:600;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 0 25px rgba(0,170,255,.6);
-}
-
-.google-icon{
-    width:30px;
-}
-
-/* =========================
-   WELCOME SECTION
-========================= */
-
-.welcome-section{
-    text-align:center;
-}
+/* Ask anything */
 
 .tagline{
-    margin-top:15px;
-
-    opacity:.7;
-
+    margin-top:10px;
+    color:#9fb8ff;
     font-size:18px;
 }
 
-/* STAR */
+/* Smaller Google button */
 
-.sage-star{
-    width:120px;
-    height:120px;
+#loginBtn{
+    margin-top:22px;
 
-    margin:30px auto;
+    width:90%;
+    max-width:320px;
 
-    border-radius:50%;
+    height:58px;
+
+    border:none;
+    border-radius:18px;
+
+    background:white;
 
     display:flex;
     align-items:center;
     justify-content:center;
+    gap:12px;
 
-    font-size:42px;
-
-    position:relative;
-
-    background:
-    rgba(120,120,255,.08);
-
-    box-shadow:
-    0 0 30px rgba(0,170,255,.2);
-}
-
-.sage-star::before{
-    content:"";
-
-    position:absolute;
-
-    width:140px;
-    height:140px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(0,170,255,.2);
-}
-
-.sage-star::after{
-    content:"";
-
-    position:absolute;
-
-    width:170px;
-    height:170px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(170,0,255,.15);
-}
-
-.welcome-section h2{
-    font-size:24px;
-
-    margin-bottom:10px;
-}
-
-.welcome-section span{
-    color:#4ea0ff;
-}
-
-.welcome-section p{
-    opacity:.7;
-}
-
-/* =========================
-   CHAT AREA
-========================= */
-
-.chat-box{
-    display:none;
-
-    flex:1;
-
-    overflow-y:auto;
-
-    margin-top:15px;
-
-    padding:10px;
-}
-
-/* =========================
-   MESSAGES
-========================= */
-
-.message{
-    max-width:80%;
-
-    padding:12px 15px;
-
-    margin:8px 0;
-
-    border-radius:18px;
-
-    line-height:1.5;
-}
-
-.user{
-    background:#00aaff;
-
-    margin-left:auto;
-}
-
-.ai{
-    background:
-    rgba(255,255,255,.08);
-
-    border:
-    1px solid rgba(255,255,255,.1);
-}
-
-/* =========================
-   SUGGESTIONS
-========================= */
-
-.suggestions{
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:10px;
-
-    margin:25px 0;
-}
-
-.suggestion-btn{
-    border:none;
-
-    border-radius:18px;
-
-    padding:15px 8px;
-
-    min-height:75px;
-
-    background:
-    rgba(255,255,255,.05);
-
-    color:white;
+    font-size:18px;
+    font-weight:600;
 
     cursor:pointer;
 
-    font-size:13px;
-
-    transition:.3s;
+    box-shadow:
+    0 0 18px #2684ff;
 }
 
-.suggestion-btn:hover{
-    transform:translateY(-3px);
+.google-icon{
+    width:28px;
+}
+
+/* SAGE orb */
+
+.sage-orb{
+    margin-top:40px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
 
     background:
-    rgba(0,170,255,.12);
+    radial-gradient(circle,
+    rgba(0,170,255,.3),
+    rgba(120,0,255,.15));
+
+    border:1px solid rgba(100,170,255,.2);
+
+    box-shadow:
+    0 0 25px #00aaff;
 }
 
-/* =========================
-   INPUT BAR
-========================= */
+/* Welcome */
+
+.welcome{
+    margin-top:24px;
+    text-align:center;
+}
+
+.welcome h1{
+    font-size:24px;
+}
+
+.welcome span{
+    color:#4aa3ff;
+}
+
+.welcome p{
+    margin-top:10px;
+    color:#9db0dd;
+}
+
+/* Suggestions */
+
+.suggestions{
+    margin-top:30px;
+
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.suggestion-btn{
+    background:
+    rgba(255,255,255,.04);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    color:white;
+
+    padding:10px 14px;
+
+    border-radius:16px;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+/* Chat */
+
+.chat-box{
+    flex:1;
+    width:100%;
+    overflow-y:auto;
+    margin-top:20px;
+}
+
+/* Input bar */
 
 .input-wrapper{
+    width:100%;
+    margin-top:18px;
+
     display:flex;
-
     align-items:center;
-
     gap:8px;
 
     padding:10px;
@@ -343,114 +203,59 @@ body::after{
     border-radius:35px;
 
     background:
-    rgba(10,20,60,.8);
+    rgba(0,10,50,.8);
 
     border:
     1px solid rgba(0,170,255,.2);
 
     box-shadow:
-    0 0 25px rgba(0,170,255,.2);
+    0 0 18px rgba(0,170,255,.25);
+}
+
+#plusBtn,
+#voiceBtn{
+    width:48px;
+    height:48px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#16285c;
+    color:white;
+
+    font-size:22px;
 }
 
 #userInput{
     flex:1;
 
-    border:none;
-
-    outline:none;
+    min-width:0;
 
     background:transparent;
+    border:none;
+    outline:none;
 
     color:white;
 
-    font-size:17px;
+    font-size:18px;
 }
 
-#userInput::placeholder{
-    color:rgba(255,255,255,.5);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-#plusBtn,
-#voiceBtn,
 #sendBtn{
-    width:50px;
-    height:50px;
+    width:54px;
+    height:54px;
+
+    flex-shrink:0;
 
     border:none;
-
     border-radius:50%;
 
-    cursor:pointer;
+    color:white;
 
     font-size:22px;
 
-    flex-shrink:0;
-}
-
-#plusBtn{
-    background:#17275d;
-    color:white;
-}
-
-#voiceBtn{
-    background:#17275d;
-    color:white;
-}
-
-#sendBtn{
     background:
     linear-gradient(
     135deg,
     #00aaff,
-    #a020f0);
-
-    color:white;
+    #a040ff);
 }
-
-#plusBtn:hover,
-#voiceBtn:hover,
-#sendBtn:hover{
-    transform:scale(1.05);
-}
-
-/* =========================
-   TYPING DOTS
-========================= */
-
-.typing{
-    display:flex;
-    gap:4px;
-}
-
-.typing span{
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:#00aaff;
-
-    animation:bounce 1s infinite;
-}
-
-.typing span:nth-child(2){
-    animation-delay:.2s;
-}
-
-.typing span:nth-child(3){
-    animation-delay:.4s;
-}
-
-@keyframes bounce{
-    0%,80%,100%{
-        transform:scale(0);
-    }
-
-    40%{
-        transform:scale(1);
-    }
-                   }
