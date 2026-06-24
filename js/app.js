@@ -1,3 +1,19 @@
+const imageInput = document.getElementById("imageInput");
+let selectedImageBase64 = null;
+
+imageInput.addEventListener("change", function () {
+    const file = imageInput.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+        selectedImageBase64 = reader.result.split(",")[1];
+    };
+
+    reader.readAsDataURL(file);
+});
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
