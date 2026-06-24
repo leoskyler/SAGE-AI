@@ -396,3 +396,220 @@ body::after{
 #sendBtn:hover{
     transform:scale(1.08);
 }
+/* =========================
+   SAGE AI WELCOME SCREEN
+========================= */
+
+/* Hide chat on startup */
+.chat-box{
+    display:none;
+}
+
+/* Welcome Section */
+
+.welcome-section{
+    text-align:center;
+    margin:50px 0;
+}
+
+.sage-star{
+    width:90px;
+    height:90px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:40px;
+
+    color:white;
+
+    background:rgba(70,80,255,0.1);
+
+    border:1px solid rgba(120,180,255,0.2);
+
+    box-shadow:
+        0 0 30px rgba(0,150,255,0.25),
+        inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+.welcome-section h2{
+    font-size:42px;
+    margin:15px 0 10px;
+    font-weight:600;
+}
+
+.welcome-section h2 span{
+    color:#4aa3ff;
+}
+
+.welcome-section p{
+    font-size:22px;
+    opacity:0.75;
+}
+
+/* Bigger Google Button */
+
+#loginBtn{
+    width:min(100%, 600px);
+
+    margin:25px auto;
+
+    padding:22px;
+
+    border-radius:22px;
+
+    font-size:28px;
+}
+
+/* Suggestions */
+
+.suggestions{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    margin-top:60px;
+    margin-bottom:40px;
+}
+
+.suggestion-btn{
+    min-width:220px;
+    min-height:80px;
+
+    font-size:20px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.03);
+
+    border:1px solid rgba(120,180,255,0.15);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.suggestion-btn:hover{
+    transform:translateY(-4px);
+
+    background:rgba(0,170,255,0.12);
+}
+
+/* Neon Container Border */
+
+.container{
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:35px;
+
+    padding:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00aaff,
+            #a855ff
+        );
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    pointer-events:none;
+}
+
+/* Better Input Bar */
+
+.input-wrapper{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px;
+
+    border-radius:35px;
+
+    background:rgba(8,15,45,0.8);
+
+    border:1px solid rgba(120,180,255,0.15);
+
+    box-shadow:
+        0 0 30px rgba(0,150,255,0.15);
+}
+
+#userInput{
+    flex:1;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:20px;
+}
+
+#plusBtn,
+#voiceBtn,
+#sendBtn{
+    width:60px;
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    transition:0.3s;
+}
+
+#plusBtn{
+    background:#13234d;
+    color:white;
+}
+
+#voiceBtn{
+    background:#13234d;
+    color:white;
+}
+
+#sendBtn{
+    background:linear-gradient(
+        135deg,
+        #00aaff,
+        #b54cff
+    );
+
+    color:white;
+}
+
+#plusBtn:hover,
+#voiceBtn:hover,
+#sendBtn:hover{
+    transform:scale(1.08);
+}
