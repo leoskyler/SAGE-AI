@@ -93,7 +93,17 @@ async function generateReply(text) {
     return data?.candidates?.[0]?.content?.parts?.[0]?.text 
         || "Sorry, I couldn't respond.";
 }
+function speak(text){
+    const speech = new SpeechSynthesisUtterance(text);
 
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    window.speechSynthesis.cancel(); // stop previous speech
+    window.speechSynthesis.speak(speech);
+}
 /* ---------------- SEND MESSAGE ---------------- */
 async function sendMessage(){
     const text = input.value.trim();
