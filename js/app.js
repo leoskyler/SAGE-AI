@@ -2,7 +2,7 @@ const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
-/* MESSAGE SYSTEM */
+/* ---------------- MESSAGE SYSTEM ---------------- */
 function addMessage(text, type){
     const msg = document.createElement("div");
     msg.classList.add("message", type);
@@ -11,7 +11,37 @@ function addMessage(text, type){
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-/* AI LOGIC */
+/* ---------------- VOICE OUTPUT ---------------- */
+function speak(text){
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    speech.rate = 1;
+    speech.pitch = 1;
+    window.speechSynthesis.cancel(); // stop previous speech
+    window.speechSynthesis.speak(speech);
+}
+
+/* ---------------- VOICE INPUT ---------------- */
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition;
+
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        input.value = transcript;
+    };
+}
+
+function startVoiceInput(){
+    if (recognition) recognition.start();
+    else alert("Voice input not supported in this browser.");
+}
+
+/* ---------------- GEMINI AI ---------------- */
 async function generateReply(text) {
     const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
@@ -27,7 +57,7 @@ async function generateReply(text) {
                     {
                         parts: [
                             {
-                                text: "You are SAGE AI, a smart helpful assistant. Reply clearly and naturally."
+                                text: "You are SAGE AI, a helpful, smart assistant. Reply clearly and naturally."
                             },
                             {
                                 text: text
@@ -41,29 +71,48 @@ async function generateReply(text) {
 
     const data = await response.json();
 
-    return data.candidates?.[0]?.content?.parts?.[0]?.text 
+    return data?.candidates?.[0]?.content?.parts?.[0]?.text 
         || "Sorry, I couldn't respond.";
 }
 
-
-/* SEND BUTTON (UPDATED FOR AI) */
-sendBtn.addEventListener("click", async () => {
+/* ---------------- SEND MESSAGE ---------------- */
+async function sendMessage(){
     const text = input.value.trim();
     if (!text) return;
 
     addMessage(text, "user");
     input.value = "";
 
-    addMessage("SAGE is thinking...", "ai");
+    // typing indicator
+    const loadingMsg = document.createElement("div");
+    loadingMsg.classList.add("message", "ai");
+    loadingMsg.textContent = "SAGE is thinking...";
+    chatBox.appendChild(loadingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
         const reply = await generateReply(text);
 
-        chatBox.lastChild.remove(); // remove "thinking..."
+        loadingMsg.remove();
         addMessage(reply, "ai");
 
+        speak(reply); // voice output
+
     } catch (error) {
-        chatBox.lastChild.remove();
+        loadingMsg.remove();
         addMessage("Error connecting to Gemini ❌", "ai");
     }
+}
+
+/* BUTTON CLICK */
+sendBtn.addEventListener("click", sendMessage);
+
+/* ENTER KEY SUPPORT */
+input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
 });
+
+/* MAKE VOICE FUNCTION GLOBAL */
+window.startVoiceInput = startVoiceInput;
