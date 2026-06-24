@@ -30,20 +30,56 @@
 </div>
 
 <div class="chat-box" id="chatBox"></div>
-    <div class="input-area">
+    <!-- Suggestions -->
+
+<div class="suggestions">
+
+    <button class="suggestion-btn">
+        💡 Explain quantum computing
+    </button>
+
+    <button class="suggestion-btn">
+        &lt;/&gt; Write Python code
+    </button>
+
+    <button class="suggestion-btn">
+        📊 Analyze this data
+    </button>
+
+</div>
+
+<!-- Hidden Upload Input -->
+
+<input
+    type="file"
+    id="imageInput"
+    accept="image/*,.pdf,.doc,.docx,.txt"
+    style="display:none;"
+>
+
+<!-- Bottom Bar -->
+
+<div class="input-wrapper">
+
+    <button id="plusBtn">
+        +
+    </button>
+
+    <button id="voiceBtn" onclick="startVoiceInput()">
+        🎤
+    </button>
 
     <input
         id="userInput"
         type="text"
-        placeholder="Message SAGE AI..."
+        placeholder="Type your message..."
     >
-        <input type="file" id="imageInput" accept="image/*">
- <button onclick="startVoiceInput()">🎤</button>
+
     <button id="sendBtn">
-        Send
+        ➤
     </button>
 
-    </div>
+</div>
     
 </div>
 
