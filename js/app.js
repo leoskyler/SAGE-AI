@@ -91,7 +91,7 @@ ${memory.lastMessages.slice(-5).join("\n")}
 Instructions:
 - Use conversation history to answer properly
 - If user mentions name, remember it
-- If user says "my name is X", extract and remember it.
+- If user says "my name is X", extract and remember it inside your response
 - Be natural and conversational
 `
     }
