@@ -218,7 +218,9 @@ body::after{
 
 .container{
     width:min(95%, 900px);
-    min-height:85vh;
+    height:88vh;
+max-height:900px;
+overflow:hidden;
 
     display:flex;
     flex-direction:column;
