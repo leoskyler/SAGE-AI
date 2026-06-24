@@ -183,7 +183,7 @@ function streamText(
 async function generateReply(message) {
 
     const apiKey =
-        "PASTE_YOUR_REAL_GEMINI_KEY_HERE";
+        "AIzaSyAY4zcI7_zOvcXH1kxQi-Uu0yvnVTmOE6g";
 
     const body = {
         contents: [
