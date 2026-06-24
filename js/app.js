@@ -174,9 +174,14 @@ saveMemory();
         const reply = await generateReply(text);
 
         loadingMsg.remove();
-        addMessage(reply, "ai");
 
-        speak(reply);
+const msg = document.createElement("div");
+msg.classList.add("message", "ai");
+chatBox.appendChild(msg);
+
+streamText(msg, reply, 15);
+
+speak(reply);
 
     } catch (error) {
         loadingMsg.remove();
@@ -231,4 +236,18 @@ function showTyping() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     return loadingMsg;
+}
+function streamText(element, text, speed = 20) {
+    element.textContent = "";
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+        element.textContent += text[i];
+        i++;
+
+        if (i >= text.length) {
+            clearInterval(interval);
+        }
+    }, speed);
 }
