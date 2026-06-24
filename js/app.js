@@ -10,6 +10,25 @@ if (localStorage.getItem("sageMemory")) {
 function saveMemory() {
     localStorage.setItem("sageMemory", JSON.stringify(memory));
 }
+function updateMemoryFromText(text) {
+    const msg = text.toLowerCase();
+
+    if (msg.includes("my name is")) {
+        const name = text.split("is")[1]?.trim();
+        if (name) {
+            memory.name = name;
+            saveMemory();
+        }
+    }
+
+    if (msg.includes("i am called")) {
+        const name = text.split("called")[1]?.trim();
+        if (name) {
+            memory.name = name;
+            saveMemory();
+        }
+    }
+}
 const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
@@ -80,20 +99,22 @@ async function generateReply(text) {
     const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
     let parts = [
-    {
-        text: `You are SAGE AI.
+{
+    text: `You are SAGE AI.
 
-User name: ${memory.name || "unknown"}
+USER PROFILE:
+- Name: ${memory.name || "unknown"}
 
-Recent conversation:
-${memory.lastMessages.slice(-5).join("\n")}
+RECENT CHAT:
+${memory.lastMessages.slice(-10).join("\n")}
 
-Instructions:
-- Use conversation history to answer properly
-- If user says "my name is X", extract and store it in memory.name
-- Be natural and conversational
+RULES:
+- If the user has a name, use it naturally in replies
+- Be friendly and conversational
+- Remember past context from recent chat
+- Do NOT ask for name if already known
 `
-    }
+}
 ];
     
     if (selectedImageBase64) {
@@ -138,6 +159,7 @@ async function sendMessage(){
     addMessage(text || "📷 Image sent", "user");
     input.value = "";
     memory.lastMessages.push(text);
+    updateMemoryFromText(text);
 
 // keep only last 10 messages
 if (memory.lastMessages.length > 10) {
@@ -176,9 +198,23 @@ input.addEventListener("keypress", (e) => {
 window.startVoiceInput = startVoiceInput;
 window.addEventListener("load", () => {
     if (memory.name) {
-        addMessage(`Welcome back ${memory.name} 👋`, "ai");
-        speak(`Welcome back ${memory.name}`);
+        addMessage(
+            `Welcome back ${memory.name} 👋 I remember you.`,
+            "ai"
+        );
+        speak(`Welcome back ${memory.name}. I remember you.`);
     } else {
-        addMessage("Hello 👋 I am SAGE AI. What is your name?", "ai");
+        addMessage(
+            "Hello 👋 I am SAGE AI. What is your name?",
+            "ai"
+        );
+    }
+
+    // show last session preview (optional but powerful)
+    if (memory.lastMessages.length > 0) {
+        addMessage(
+            "I also remember our last conversation 👍",
+            "ai"
+        );
     }
 });
