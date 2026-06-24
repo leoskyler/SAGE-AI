@@ -12,42 +12,58 @@ function addMessage(text, type){
 }
 
 /* AI LOGIC */
-function generateReply(text) {
-    const msg = text.toLowerCase().trim();
+async function generateReply(text) {
+    const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
-    if (msg.includes("hello") || msg.includes("hi")) {
-        return "Hello 👋 I am SAGE AI. How can I help you today?";
-    }
+    const response = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text: "You are SAGE AI, a smart helpful assistant. Reply clearly and naturally."
+                            },
+                            {
+                                text: text
+                            }
+                        ]
+                    }
+                ]
+            })
+        }
+    );
 
-    if (msg.includes("who are you")) {
-        return "I am SAGE AI, your personal assistant built to help you.";
-    }
+    const data = await response.json();
 
-    if (msg.includes("time")) {
-        return "Current time is: " + new Date().toLocaleTimeString();
-    }
-
-    if (msg.includes("date") || msg.includes("day")) {
-        return "Today is " + new Date().toDateString();
-    }
-
-    if (msg.includes("help")) {
-        return "Ask me anything and I will try to respond.";
-    }
-
-    return "I’m still learning 🤖. Try asking something else!";
+    return data.candidates?.[0]?.content?.parts?.[0]?.text 
+        || "Sorry, I couldn't respond.";
 }
 
-/* SEND BUTTON */
-sendBtn.addEventListener("click", () => {
+
+/* SEND BUTTON (UPDATED FOR AI) */
+sendBtn.addEventListener("click", async () => {
     const text = input.value.trim();
-    if(!text) return;
+    if (!text) return;
 
     addMessage(text, "user");
     input.value = "";
 
-    setTimeout(() => {
-        const reply = generateReply(text);
+    addMessage("SAGE is thinking...", "ai");
+
+    try {
+        const reply = await generateReply(text);
+
+        chatBox.lastChild.remove(); // remove "thinking..."
         addMessage(reply, "ai");
-    }, 600);
+
+    } catch (error) {
+        chatBox.lastChild.remove();
+        addMessage("Error connecting to Gemini ❌", "ai");
+    }
 });
