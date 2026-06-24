@@ -60,8 +60,28 @@ function speak(text){
 }
 
 /* ---------------- GEMINI AI ---------------- */
-async function generateReply(text) {
+async async function generateReply(text) {
+
     const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
+
+    let parts = [
+        {
+            text: "You are SAGE AI. Describe images and answer clearly."
+        }
+    ];
+
+    if (text) {
+        parts.push({ text });
+    }
+
+    if (selectedImageBase64) {
+        parts.push({
+            inline_data: {
+                mime_type: "image/jpeg",
+                data: selectedImageBase64
+            }
+        });
+    }
 
     const response = await fetch(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey,
@@ -73,24 +93,19 @@ async function generateReply(text) {
             body: JSON.stringify({
                 contents: [
                     {
-                        parts: [
-                            {
-                                text: "You are SAGE AI, a helpful, smart assistant. Reply clearly and naturally."
-                            },
-                            {
-                                text: text
-                            }
-                        ]
+                        parts: parts
                     }
                 ]
             })
         }
     );
 
+    selectedImageBase64 = null;
+
     const data = await response.json();
 
     return data?.candidates?.[0]?.content?.parts?.[0]?.text
-        || "Sorry, I couldn't respond.";
+        || "I couldn't analyze the image.";
 }
 
 /* ---------------- SEND MESSAGE ---------------- */
