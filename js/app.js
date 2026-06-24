@@ -75,3 +75,39 @@ function createParticle(){
 }
 
 setInterval(createParticle, 200);
+const chatBox = document.getElementById("chatBox");
+const input = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+
+function addMessage(text, type){
+    const msg = document.createElement("div");
+    msg.classList.add("message", type);
+    msg.textContent = text;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function botReply(userText){
+    let reply = "I am still learning... 🤖";
+
+    if(userText.toLowerCase().includes("hello")){
+        reply = "Hello 👋 I am SAGE AI.";
+    }
+    else if(userText.toLowerCase().includes("who are you")){
+        reply = "I am SAGE AI, your assistant.";
+    }
+
+    setTimeout(() => {
+        addMessage(reply, "ai");
+    }, 600);
+}
+
+sendBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if(!text) return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    botReply(text);
+});
