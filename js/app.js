@@ -1,213 +1,134 @@
+  /* ==========================
+   SAGE AI
+========================== */
+
 let memory = {
     name: null,
     lastMessages: []
 };
 
-// load saved memory
-if (localStorage.getItem("sageMemory")) {
-    memory = JSON.parse(localStorage.getItem("sageMemory"));
+/* ==========================
+   MEMORY
+========================== */
+
+const savedMemory = localStorage.getItem("sageMemory");
+
+if (savedMemory) {
+    memory = JSON.parse(savedMemory);
 }
+
 function saveMemory() {
-    localStorage.setItem("sageMemory", JSON.stringify(memory));
+    localStorage.setItem(
+        "sageMemory",
+        JSON.stringify(memory)
+    );
 }
-function updateMemoryFromText(text) {
-    const msg = text.toLowerCase();
 
-    if (msg.includes("my name is")) {
-        const name = text.split("is")[1]?.trim();
-        if (name) {
-            memory.name = name;
-            saveMemory();
-        }
-    }
+/* ==========================
+   ELEMENTS
+========================== */
 
-    if (msg.includes("i am called")) {
-        const name = text.split("called")[1]?.trim();
-        if (name) {
-            memory.name = name;
-            saveMemory();
-        }
-    }
-}
-const chatBox = document.getElementById("chatBox");
-const input = document.getElementById("userInput");
-const sendBtn = document.getElementById("sendBtn");
+const chatBox =
+    document.getElementById("chatBox");
 
-/* ---------------- IMAGE INPUT ---------------- */
-const imageInput = document.getElementById("imageInput");
+const userInput =
+    document.getElementById("userInput");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const imageInput =
+    document.getElementById("imageInput");
+
+const suggestions =
+    document.getElementById("suggestions");
+
+const hero =
+    document.querySelector(".hero");
+
+/* ==========================
+   FILE UPLOAD
+========================== */
+
 let selectedImageBase64 = null;
 
 if (imageInput) {
-    imageInput.addEventListener("change", function () {
-        const file = imageInput.files[0];
-        if (!file) return;
 
-        const reader = new FileReader();
+    imageInput.addEventListener(
+        "change",
+        function () {
 
-        reader.onload = function () {
-            selectedImageBase64 = reader.result.split(",")[1];
-        };
+            const file =
+                imageInput.files[0];
 
-        reader.readAsDataURL(file);
-    });
-}
+            if (!file) return;
 
-/* ---------------- MESSAGE SYSTEM ---------------- */
-function addMessage(text, type){
-    const msg = document.createElement("div");
-    msg.classList.add("message", type);
-    msg.textContent = text;
-    chatBox.appendChild(msg);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+            const reader =
+                new FileReader();
 
-/* ---------------- VOICE INPUT ---------------- */
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition;
+            reader.onload = function () {
 
-if (SpeechRecognition) {
-    recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.continuous = false;
+                selectedImageBase64 =
+                    reader.result.split(",")[1];
 
-    recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        input.value = transcript;
-    };
-}
+                addMessage(
+                    "📷 Image attached",
+                    "user"
+                );
 
-function startVoiceInput(){
-    if (recognition) recognition.start();
-    else alert("Voice input is not supported in this browser.");
-}
+            };
 
-/* ---------------- VOICE OUTPUT ---------------- */
-function speak(text){
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-US";
-    speech.rate = 1;
-    speech.pitch = 1;
-    speech.volume = 1;
+            reader.readAsDataURL(file);
 
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
-}
-
-/* ---------------- GEMINI AI ---------------- */
-async function generateReply(text) {
-
-    const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
-
-    let parts = [
-{
-    text: `You are SAGE AI.
-
-USER PROFILE:
-- Name: ${memory.name || "unknown"}
-
-RECENT CHAT:
-${memory.lastMessages.slice(-10).join("\n")}
-
-RULES:
-- If the user has a name, use it naturally in replies
-- Be friendly and conversational
-- Remember past context from recent chat
-- Do NOT ask for name if already known
-`
-}
-];
-    
-    if (selectedImageBase64) {
-        parts.push({
-            inline_data: {
-                mime_type: "image/jpeg",
-                data: selectedImageBase64
-            }
-        });
-    }
-
-    const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                contents: [
-                    {
-                        parts: parts
-                    }
-                ]
-            })
         }
     );
 
-    selectedImageBase64 = null;
-
-    const data = await response.json();
-
-    return data?.candidates?.[0]?.content?.parts?.[0]?.text
-        || "I couldn't analyze the image.";
 }
 
-/* ---------------- SEND MESSAGE ---------------- */
-async function sendMessage(){
-    const text = input.value.trim();
-    if (!text && !selectedImageBase64) return;
+/* ==========================
+   CHAT MESSAGES
+========================== */
 
-    addMessage(text || "📷 Image sent", "user");
-    input.value = "";
-    memory.lastMessages.push(text);
-    updateMemoryFromText(text);
+function addMessage(text, type) {
 
-// keep only last 10 messages
-if (memory.lastMessages.length > 10) {
-    memory.lastMessages.shift();
+    const div =
+        document.createElement("div");
+
+    div.classList.add(
+        "message",
+        type
+    );
+
+    div.textContent = text;
+
+    chatBox.appendChild(div);
+
+    scrollToBottom();
+
 }
 
-saveMemory();
+function scrollToBottom() {
 
-    const loadingMsg = showTyping();
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
 
-    try {
-        const reply = await generateReply(text);
-
-        loadingMsg.remove();
-
-const msg = document.createElement("div");
-msg.classList.add("message", "ai");
-chatBox.appendChild(msg);
-
-streamText(msg, reply, 15);
-
-speak(reply);
-
-    } catch (error) {
-        loadingMsg.remove();
-        addMessage("Error connecting to Gemini ❌", "ai");
-    }
 }
 
-/* EVENTS */
-sendBtn.addEventListener("click", sendMessage);
-
-input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendMessage();
-});
-
-/* GLOBAL */
-window.startVoiceInput = startVoiceInput;
-
-window.addEventListener("load", () => {
-    // Welcome screen only
-});
+/* ==========================
+   TYPING
+========================== */
 
 function showTyping() {
-    const loadingMsg = document.createElement("div");
-    loadingMsg.classList.add("message", "ai");
 
-    loadingMsg.innerHTML = `
+    const div =
+        document.createElement("div");
+
+    div.classList.add(
+        "message",
+        "ai"
+    );
+
+    div.innerHTML = `
         <div class="typing">
             <span></span>
             <span></span>
@@ -215,22 +136,238 @@ function showTyping() {
         </div>
     `;
 
-    chatBox.appendChild(loadingMsg);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatBox.appendChild(div);
 
-    return loadingMsg;
+    scrollToBottom();
+
+    return div;
+
 }
-function streamText(element, text, speed = 20) {
+
+/* ==========================
+   STREAM EFFECT
+========================== */
+
+function streamText(
+    element,
+    text,
+    speed = 15
+) {
+
     element.textContent = "";
 
     let i = 0;
 
-    const interval = setInterval(() => {
-        element.textContent += text[i];
-        i++;
+    const interval =
+        setInterval(() => {
 
-        if (i >= text.length) {
-            clearInterval(interval);
-        }
-    }, speed);
+            element.textContent +=
+                text.charAt(i);
+
+            i++;
+
+            scrollToBottom();
+
+            if (i >= text.length) {
+                clearInterval(interval);
+            }
+
+        }, speed);
+
 }
+
+/* ==========================
+   GEMINI
+========================== */
+
+async function generateReply(message) {
+
+    const apiKey =
+        "PASTE_YOUR_REAL_GEMINI_KEY_HERE";
+
+    const body = {
+        contents: [
+            {
+                parts: [
+                    {
+                        text: message
+                    }
+                ]
+            }
+        ]
+    };
+
+    const response =
+        await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(body)
+            }
+        );
+
+    const data =
+        await response.json();
+
+    console.log(data);
+
+    return (
+        data?.candidates?.[0]
+            ?.content?.parts?.[0]
+            ?.text
+        ||
+        "Sorry, I couldn't generate a response."
+    );
+
+}
+
+/* ==========================
+   SEND
+========================== */
+
+async function sendMessage() {
+
+    const text =
+        userInput.value.trim();
+
+    if (!text) return;
+
+    hero.style.display = "none";
+
+    addMessage(
+        text,
+        "user"
+    );
+
+    userInput.value = "";
+
+    memory.lastMessages.push(text);
+
+    if (
+        memory.lastMessages.length > 10
+    ) {
+
+        memory.lastMessages.shift();
+
+    }
+
+    saveMemory();
+
+    const loading =
+        showTyping();
+
+    try {
+
+        const reply =
+            await generateReply(text);
+
+        loading.remove();
+
+        const aiMessage =
+            document.createElement("div");
+
+        aiMessage.classList.add(
+            "message",
+            "ai"
+        );
+
+        chatBox.appendChild(aiMessage);
+
+        streamText(
+            aiMessage,
+            reply
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        loading.remove();
+
+        addMessage(
+            "❌ Failed to contact Gemini.",
+            "ai"
+        );
+
+    }
+
+}
+
+/* ==========================
+   EVENTS
+========================== */
+
+sendBtn.addEventListener(
+    "click",
+    sendMessage
+);
+
+userInput.addEventListener(
+    "keydown",
+    (e) => {
+
+        if (
+            e.key === "Enter"
+        ) {
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+/* ==========================
+   VOICE INPUT
+========================== */
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+let recognition;
+
+if (SpeechRecognition) {
+
+    recognition =
+        new SpeechRecognition();
+
+    recognition.lang =
+        "en-US";
+
+    recognition.onresult =
+        (event) => {
+
+            userInput.value =
+                event.results[0][0]
+                    .transcript;
+
+        };
+
+}
+
+function startVoiceInput() {
+
+    if (recognition) {
+
+        recognition.start();
+
+    }
+
+}
+
+/* ==========================
+   GLOBAL
+========================== */
+
+window.startVoiceInput =
+    startVoiceInput;  
