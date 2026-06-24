@@ -91,15 +91,13 @@ ${memory.lastMessages.slice(-5).join("\n")}
 Instructions:
 - Use conversation history to answer properly
 - If user mentions name, remember it
+- If user says "my name is X", extract and remember it.
 - Be natural and conversational
 `
     }
 ];
-If user says "my name is X", extract and remember it.
-    if (text) {
-        parts.push({ text });
-    }
 
+    
     if (selectedImageBase64) {
         parts.push({
             inline_data: {
