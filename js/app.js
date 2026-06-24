@@ -80,10 +80,21 @@ async function generateReply(text) {
     const apiKey = "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
     let parts = [
-        {
-            text: "You are SAGE AI. You answer clearly and can analyze images."
-        }
-    ];
+    {
+        text: `You are SAGE AI.
+
+User name: ${memory.name || "unknown"}
+
+Recent conversation:
+${memory.lastMessages.slice(-5).join("\n")}
+
+Instructions:
+- Use conversation history to answer properly
+- If user mentions name, remember it
+- Be natural and conversational
+`
+    }
+];
 
     if (text) {
         parts.push({ text });
