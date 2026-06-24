@@ -95,7 +95,7 @@ Instructions:
 `
     }
 ];
-
+If user says "my name is X", extract and remember it.
     if (text) {
         parts.push({ text });
     }
@@ -178,3 +178,11 @@ input.addEventListener("keypress", (e) => {
 
 /* GLOBAL */
 window.startVoiceInput = startVoiceInput;
+window.addEventListener("load", () => {
+    if (memory.name) {
+        addMessage(`Welcome back ${memory.name} 👋`, "ai");
+        speak(`Welcome back ${memory.name}`);
+    } else {
+        addMessage("Hello 👋 I am SAGE AI. What is your name?", "ai");
+    }
+});
