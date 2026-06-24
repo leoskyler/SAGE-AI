@@ -58,3 +58,20 @@ aiMessage.innerHTML = "<strong>SAGE AI:</strong> " + reply;
 userInput.value = "";
     });
 }
+const particlesContainer = document.querySelector(".particles");
+
+function createParticle(){
+    const particle = document.createElement("span");
+
+    particle.style.left = Math.random() * 100 + "vw";
+    particle.style.animationDuration = (3 + Math.random() * 5) + "s";
+    particle.style.opacity = Math.random();
+
+    particlesContainer.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, 8000);
+}
+
+setInterval(createParticle, 200);
