@@ -28,7 +28,7 @@ if (SpeechRecognition) {
 
 function startVoiceInput(){
     if (recognition) recognition.start();
-    else alert("Voice input not supported in this browser.");
+    else alert("Voice input is not supported in this browser.");
 }
 
 /* ---------------- VOICE OUTPUT ---------------- */
@@ -111,5 +111,5 @@ input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") sendMessage();
 });
 
-/* GLOBAL VOICE ACCESS */
+/* GLOBAL */
 window.startVoiceInput = startVoiceInput;
