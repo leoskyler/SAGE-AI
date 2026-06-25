@@ -725,31 +725,3 @@ body{
 }
 /* SAGE LOGO CENTER */
 
-.sage-center{
-    width:120px;
-    height:120px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:radial-gradient(
-        circle,
-        #12225a,
-        #060d2e
-    );
-
-    box-shadow:
-        0 0 30px rgba(0,170,255,.5),
-        0 0 60px rgba(123,44,255,.3);
-
-    overflow:hidden;
-}
-
-.sage-center img{
-    width:85px;
-    height:85px;
-    object-fit:contain;
-}
