@@ -156,9 +156,8 @@ body{
 .orb-core{
     width:70px;
     height:70px;
-    border-radius:50%;
 
-   overflow:hidden;
+    border-radius:50%;
 
     position:absolute;
     left:50%;
@@ -166,21 +165,15 @@ body{
 
     transform:translate(-50%,-50%);
 
-    background:
-    radial-gradient(
+    overflow:hidden;
+
+    background:radial-gradient(
         circle,
         #1d4ed8,
         #081347
     );
-.orb-core img{
-    width:60px;
-    height:60px;
-    object-fit:contain;
-    display:block;
-}
 
-    box-shadow:
-    0 0 35px #2563eb;
+    box-shadow:0 0 35px #2563eb;
 }
 
 .orb-symbol{
