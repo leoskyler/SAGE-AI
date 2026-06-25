@@ -720,20 +720,68 @@ body{
     }
 }
 /* =========================
-   AI ORB CORE (NO IMAGE)
+   PREMIUM AI ORB DESIGN
 ========================= */
 
-.orb-core{
-    width:110px;
-    height:110px;
+.landing-orb{
+    width:180px;
+    height:180px;
 
-    border-radius:50%;
+    margin:30px auto;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
     position:relative;
+}
+
+/* outer glow ring */
+.landing-orb::before{
+    content:"";
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(0,170,255,0.15),
+        transparent 60%
+    );
+
+    animation: glowPulse 3s infinite ease-in-out;
+}
+
+/* rotating ring */
+.landing-orb::after{
+    content:"";
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    border:2px solid transparent;
+    border-top:2px solid #00aaff;
+    border-bottom:2px solid #8a2be2;
+
+    animation: spin 4s linear infinite;
+}
+
+/* core container */
+.orb-core{
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
     background: radial-gradient(
         circle,
@@ -742,27 +790,17 @@ body{
     );
 
     box-shadow:
-        0 0 25px rgba(0,170,255,.5),
-        0 0 60px rgba(123,44,255,.3);
+        0 0 25px rgba(0,170,255,.7),
+        0 0 60px rgba(123,44,255,.4);
+
+    z-index:2;
 }
 
-.orb-core::before{
-    content:"";
-    position:absolute;
-    width:140px;
-    height:140px;
-    border-radius:50%;
-
-    border:2px solid transparent;
-    border-top:2px solid #00aaff;
-    border-right:2px solid #8a2be2;
-
-    animation: spin 3s linear infinite;
-}
-
+/* inner AI dot */
 .ai-core{
-    width:55px;
-    height:55px;
+    width:35px;
+    height:35px;
+
     border-radius:50%;
 
     background: linear-gradient(
@@ -778,13 +816,19 @@ body{
     animation: pulse 2s infinite ease-in-out;
 }
 
+/* animations */
 @keyframes spin{
     0%{ transform:rotate(0deg); }
     100%{ transform:rotate(360deg); }
 }
 
 @keyframes pulse{
-    0%,100%{ transform:scale(1); opacity:0.9; }
-    50%{ transform:scale(1.2); opacity:1; }
+    0%,100%{ transform:scale(1); opacity:0.8; }
+    50%{ transform:scale(1.4); opacity:1; }
+}
+
+@keyframes glowPulse{
+    0%,100%{ opacity:0.4; }
+    50%{ opacity:1; }
 }
 
