@@ -645,3 +645,77 @@ body{
 
     filter:blur(40px);
 }
+/* AI ORB */
+
+.landing-orb{
+    width:160px;
+    height:160px;
+
+    margin:30px auto;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+
+    border:1px solid rgba(100,150,255,.25);
+
+    box-shadow:
+        0 0 30px rgba(80,150,255,.25),
+        inset 0 0 30px rgba(80,150,255,.15);
+
+    animation: floatOrb 4s ease-in-out infinite;
+}
+
+.landing-orb::before{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(120,120,255,.15);
+}
+
+.orb-core{
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:40px;
+
+    background:linear-gradient(
+        135deg,
+        #00aaff,
+        #7b2cff
+    );
+
+    box-shadow:
+        0 0 30px rgba(0,170,255,.7),
+        0 0 60px rgba(123,44,255,.4);
+}
+
+@keyframes floatOrb{
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
