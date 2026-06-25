@@ -490,3 +490,98 @@ body{
 }
 
       }
+/* LANDING PAGE */
+
+.landing-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at top right,#3b0d7a 0%,transparent 35%),
+    radial-gradient(circle at top left,#174cff 0%,transparent 30%),
+    #050a2c;
+}
+
+.hero{
+    width:90%;
+    max-width:450px;
+    text-align:center;
+    z-index:2;
+}
+
+.hero-logo{
+    font-size:4rem;
+    font-weight:900;
+    color:white;
+    margin-bottom:20px;
+
+    text-shadow:
+    0 0 15px #4facfe,
+    0 0 30px #4facfe;
+}
+
+.hero-logo span{
+    color:#6da9ff;
+}
+
+.hero-text{
+    font-size:1.4rem;
+    color:#cfd8ff;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.btn-primary,
+.btn-google{
+    border:none;
+    text-decoration:none;
+    padding:18px;
+    border-radius:18px;
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-primary{
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #4facfe,
+        #8b5cf6
+    );
+
+    box-shadow:
+    0 0 25px rgba(79,172,254,.5);
+}
+
+.btn-google{
+    background:white;
+    color:black;
+}
+
+.hero-footer{
+    margin-top:35px;
+    color:#9f8cff;
+    font-size:14px;
+}
+
+.glow-bg{
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:radial-gradient(
+        circle,
+        rgba(79,172,254,.25),
+        transparent 70%
+    );
+
+    filter:blur(40px);
+}
