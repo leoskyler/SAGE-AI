@@ -513,18 +513,28 @@ body{
 }
 
 .hero-logo{
-    font-size:4rem;
+    font-size:5rem;
     font-weight:900;
-    color:white;
+    letter-spacing:4px;
+    line-height:1;
     margin-bottom:20px;
+    color:#fff;
 
     text-shadow:
-    0 0 15px #4facfe,
-    0 0 30px #4facfe;
+        0 0 15px rgba(80,180,255,.8),
+        0 0 40px rgba(80,180,255,.5),
+        0 0 80px rgba(80,180,255,.3);
 }
 
 .hero-logo span{
-    color:#6da9ff;
+    background:linear-gradient(
+        90deg,
+        #4da3ff,
+        #9d5cff
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
 .hero-text{
