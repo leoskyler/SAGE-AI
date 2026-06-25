@@ -684,8 +684,8 @@ body{
 }
 
 .orb-core{
-    width:100px;
-    height:100px;
+    width:110px;
+    height:110px;
 
     border-radius:50%;
 
@@ -707,13 +707,16 @@ body{
 }
 
 .orb-core img{
-    width:70px;
-    height:70px;
+    width:80%;
+    height:80%;
 
     object-fit:contain;
 
     display:block;
+
+    margin:auto;
 }
+
 @keyframes floatOrb{
     0%{
         transform:translateY(0);
