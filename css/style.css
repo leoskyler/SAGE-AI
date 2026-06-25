@@ -173,10 +173,11 @@ body{
         #081347
     );
 .orb-core img{
-    width:60%;
-    height:60%;
+    width:60px;
+    height:60px;
     object-fit:contain;
-}    
+    display:block;
+}
 
     box-shadow:
     0 0 35px #2563eb;
@@ -695,11 +696,11 @@ body{
 
     border-radius:50%;
 
+    overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
-
-    font-size:40px;
 
     background:linear-gradient(
         135deg,
@@ -707,6 +708,10 @@ body{
         #7b2cff
     );
 
+    box-shadow:
+        0 0 30px rgba(0,170,255,.7),
+        0 0 60px rgba(123,44,255,.4);
+}
     box-shadow:
         0 0 30px rgba(0,170,255,.7),
         0 0 60px rgba(123,44,255,.4);
