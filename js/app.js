@@ -35,12 +35,15 @@ function updateMemoryFromText(text) {
 
     if (lower.includes("my name is")) {
 
-        const name = text.split(/my name is/i)[1]?.trim();
+    const name = text.split(/my name is/i)[1]?.trim();
 
-        if (name) {
-            memory.name = name;
-            saveMemory();
-        }
+    if (name) {
+        memory.name = name;
+        saveMemory();
+    }
+
+}
+
 if (lower.includes("my favorite color is")) {
 
     const color = text.split(/my favorite color is/i)[1]?.trim();
@@ -84,20 +87,11 @@ if (lower.includes("i speak")) {
     }
 
 }
-    }
+        
 
-    if (lower.includes("i am called")) {
+    
 
-        const name = text.split(/i am called/i)[1]?.trim();
 
-        if (name) {
-            memory.name = name;
-            saveMemory();
-        }
-
-    }
-
-}
 /* ==========================
    ELEMENTS
 ========================== */
@@ -308,11 +302,7 @@ ${memory.lastMessages.join("\n")}
 
 User Message:
 ${message}
-Recent conversation:
-${memory.lastMessages.join("\n")}
 
-User message:
-${message}
 
 Instructions:
 - Answer naturally and accurately.
