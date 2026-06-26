@@ -1,8 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithPopup, 
-    GoogleAuthProvider 
+import {
+    getAuth,
+    signInWithRedirect,
+    getRedirectResult,
+    GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -21,19 +22,31 @@ const provider = new GoogleAuthProvider();
 const loginBtn = document.getElementById("loginBtn");
 
 // Google Sign-in
-loginBtn.addEventListener("click", async () => {
-    try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        alert("Welcome " + user.displayName);
-        console.log(user);
-
-        // OPTIONAL: hide login button after sign-in
-        loginBtn.style.display = "none";
-
-    } catch (error) {
-        console.error(error);
-        alert("Login failed");
-    }
+// Sign in when button is tapped
+loginBtn.addEventListener("click", () => {
+    signInWithRedirect(auth, provider);
 });
+
+// After returning from Google
+getRedirectResult(auth)
+    .then((result) => {
+        if (result) {
+            const user = result.user;
+
+            alert("Welcome " + user.displayName);
+
+            // Save user information
+            localStorage.setItem("sageUser", JSON.stringify({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            }));
+
+            // Go to chat page
+            window.location.href = "chat.html";
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+        alert("Login failed: " + error.message);
+    });
