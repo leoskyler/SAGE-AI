@@ -831,4 +831,46 @@ body{
     0%,100%{ opacity:0.4; }
     50%{ opacity:1; }
 }
+/* ==========================
+   COPY BUTTON
+========================== */
 
+.copy-btn{
+
+    float:right;
+
+    margin-bottom:6px;
+
+    padding:6px 12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#2b6cff;
+
+    color:#fff;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.copy-btn:hover{
+
+    background:#4d85ff;
+
+}
+
+pre{
+
+    clear:both;
+
+    overflow:auto;
+
+    border-radius:12px;
+
+    padding:15px;
+}
