@@ -220,40 +220,15 @@ function showTyping() {
 /* ==========================
    STREAM EFFECT
 ========================== */
-function streamText(element, text, speed = 10) {
+function streamText(element, text, speed = 15) {
+
+    element.textContent = "";
 
     let i = 0;
 
-    let output = "";
-
     const interval = setInterval(() => {
 
-        output += text.charAt(i);
-
-       element.innerHTML = marked.parse(output);
-hljs.highlightElement(block);
-element.querySelectorAll("pre").forEach((pre) => {
-
-    if (!pre.querySelector(".copy-btn")) {
-
-        const btn = document.createElement("button");
-
-        btn.className = "copy-btn";
-        btn.innerText = "📋 Copy";
-
-        btn.onclick = function () {
-            copyCode(btn);
-        };
-
-        pre.parentNode.insertBefore(btn, pre);
-
-    }
-
-});
-
-element.querySelectorAll("pre code").forEach((block) => {
-    hljs.highlightElement(block);
-}); 
+        element.textContent += text.charAt(i);
 
         scrollToBottom();
 
@@ -261,12 +236,17 @@ element.querySelectorAll("pre code").forEach((block) => {
 
         if (i >= text.length) {
             clearInterval(interval);
+
+            // Convert to Markdown once, after typing finishes
+            element.innerHTML = marked.parse(element.textContent);
+
+            element.querySelectorAll("pre code").forEach((block) => {
+                hljs.highlightElement(block);
+            });
         }
 
     }, speed);
-
 }
-
 
 
 /* ==========================
