@@ -219,34 +219,31 @@ function showTyping() {
 /* ==========================
    STREAM EFFECT
 ========================== */
-
-function streamText(
-    element,
-    text,
-    speed = 15
-) {
-
-    element.textContent = "";
+function streamText(element, text, speed = 10) {
 
     let i = 0;
 
-    const interval =
-        setInterval(() => {
+    let output = "";
 
-            element.textContent +=
-                text.charAt(i);
+    const interval = setInterval(() => {
 
-            i++;
+        output += text.charAt(i);
 
-            scrollToBottom();
+        element.innerHTML = marked.parse(output);
 
-            if (i >= text.length) {
-                clearInterval(interval);
-            }
+        scrollToBottom();
 
-        }, speed);
+        i++;
+
+        if (i >= text.length) {
+            clearInterval(interval);
+        }
+
+    }, speed);
 
 }
+
+
 
 /* ==========================
    GEMINI
