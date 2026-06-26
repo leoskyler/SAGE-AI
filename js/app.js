@@ -229,7 +229,30 @@ function streamText(element, text, speed = 10) {
 
         output += text.charAt(i);
 
-        element.innerHTML = marked.parse(output);
+       element.innerHTML = marked.parse(output);
+
+element.querySelectorAll("pre").forEach((pre) => {
+
+    if (!pre.querySelector(".copy-btn")) {
+
+        const btn = document.createElement("button");
+
+        btn.className = "copy-btn";
+        btn.innerText = "📋 Copy";
+
+        btn.onclick = function () {
+            copyCode(btn);
+        };
+
+        pre.parentNode.insertBefore(btn, pre);
+
+    }
+
+});
+
+element.querySelectorAll("pre code").forEach((block) => {
+    hljs.highlightElement(block);
+}); 
 
         scrollToBottom();
 
@@ -468,6 +491,22 @@ function startVoiceInput() {
 /* ==========================
    GLOBAL
 ========================== */
+function copyCode(button) {
+
+    const code =
+        button.parentElement.nextElementSibling.innerText;
+
+    navigator.clipboard.writeText(code);
+
+    button.innerText = "✅ Copied";
+
+    setTimeout(() => {
+
+        button.innerText = "📋 Copy";
+
+    }, 2000);
+
+}
 
 window.startVoiceInput =
     startVoiceInput;  
