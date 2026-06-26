@@ -88,10 +88,7 @@ if (lower.includes("i speak")) {
 
 }
         
-
-    
-
-
+}
 /* ==========================
    ELEMENTS
 ========================== */
@@ -234,7 +231,7 @@ function streamText(element, text, speed = 10) {
         output += text.charAt(i);
 
        element.innerHTML = marked.parse(output);
-
+hljs.highlightElement(block);
 element.querySelectorAll("pre").forEach((pre) => {
 
     if (!pre.querySelector(".copy-btn")) {
