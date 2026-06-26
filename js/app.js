@@ -1,9 +1,9 @@
   /* ==========================
    SAGE AI
 ========================== */
+let chats = JSON.parse(localStorage.getItem("sageChats")) || [];
 
 let memory = {
-   let chats = JSON.parse(localStorage.getItem("sageChats")) || [];
     name: null,
     favoriteColor: null,
     occupation: null,
@@ -11,6 +11,7 @@ let memory = {
     language: null,
     lastMessages: []
 };
+
 
 /* ==========================
    MEMORY
