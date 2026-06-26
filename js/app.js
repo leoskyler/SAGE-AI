@@ -289,6 +289,7 @@ Instructions:
 - If the user uploads an image, analyse it.
 - If there is no image, simply answer the text normally.
 - Never mention images unless one was uploaded.
+- Never repeat the same character or word many times.
 `
                 }
             ]
@@ -315,7 +316,7 @@ Instructions:
     const data =
         await response.json();
 
-    console.log(data);
+    console.log("Gemini response:", data);
 
     return (
         data?.candidates?.[0]
