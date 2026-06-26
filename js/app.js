@@ -4,6 +4,10 @@
 
 let memory = {
     name: null,
+    favoriteColor: null,
+    occupation: null,
+    country: null,
+    language: null,
     lastMessages: []
 };
 
@@ -23,7 +27,75 @@ function saveMemory() {
         JSON.stringify(memory)
     );
 }
+function updateMemoryFromText(text) {
 
+    const lower = text.toLowerCase();
+
+    if (lower.includes("my name is")) {
+
+        const name = text.split(/my name is/i)[1]?.trim();
+
+        if (name) {
+            memory.name = name;
+            saveMemory();
+        }
+if (lower.includes("my favorite color is")) {
+
+    const color = text.split(/my favorite color is/i)[1]?.trim();
+
+    if (color) {
+        memory.favoriteColor = color;
+        saveMemory();
+    }
+
+}
+
+if (lower.includes("i live in")) {
+
+    const country = text.split(/i live in/i)[1]?.trim();
+
+    if (country) {
+        memory.country = country;
+        saveMemory();
+    }
+
+}
+
+if (lower.includes("i am a")) {
+
+    const job = text.split(/i am a/i)[1]?.trim();
+
+    if (job) {
+        memory.occupation = job;
+        saveMemory();
+    }
+
+}
+
+if (lower.includes("i speak")) {
+
+    const language = text.split(/i speak/i)[1]?.trim();
+
+    if (language) {
+        memory.language = language;
+        saveMemory();
+    }
+
+}
+    }
+
+    if (lower.includes("i am called")) {
+
+        const name = text.split(/i am called/i)[1]?.trim();
+
+        if (name) {
+            memory.name = name;
+            saveMemory();
+        }
+
+    }
+
+}
 /* ==========================
    ELEMENTS
 ========================== */
@@ -186,16 +258,46 @@ async function generateReply(message) {
         "AIzaSyAY4zcI7_zOvcXH1kxQi-Uu0yvnVTmOE6g";
 
     const body = {
-        contents: [
-            {
-                parts: [
-                    {
-                        text: message
-                    }
-                ]
-            }
-        ]
-    };
+    contents: [
+        {
+            parts: [
+                {
+                    text: `
+You are SAGE AI, a smart, friendly and professional AI assistant.
+
+User Profile
+
+Name: ${memory.name || "Unknown"}
+Occupation: ${memory.occupation || "Unknown"}
+Country: ${memory.country || "Unknown"}
+Favorite Color: ${memory.favoriteColor || "Unknown"}
+Language: ${memory.language || "Unknown"}
+
+Recent Conversation:
+${memory.lastMessages.join("\n")}
+
+User Message:
+${message}
+Recent conversation:
+${memory.lastMessages.join("\n")}
+
+User message:
+${message}
+
+Instructions:
+- Answer naturally and accurately.
+- Use the user's name if you know it.
+- Format code inside Markdown code blocks.
+- Use bullet points when helpful.
+- If the user uploads an image, analyse it.
+- If there is no image, simply answer the text normally.
+- Never mention images unless one was uploaded.
+`
+                }
+            ]
+        }
+    ]
+};
 
     const response =
         await fetch(
@@ -249,6 +351,7 @@ async function sendMessage() {
     userInput.value = "";
 
     memory.lastMessages.push(text);
+  updateMemoryFromText(text);
 
     if (
         memory.lastMessages.length > 10
