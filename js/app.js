@@ -3,6 +3,7 @@
 ========================== */
 
 let memory = {
+   let chats = JSON.parse(localStorage.getItem("sageChats")) || [];
     name: null,
     favoriteColor: null,
     occupation: null,
@@ -118,6 +119,14 @@ const suggestions =
 const hero =
     document.querySelector(".hero");
 
+const sidebar =
+    document.getElementById("sidebar");
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const newChatBtn =
+    document.getElementById("newChatBtn");
 /* ==========================
    FILE UPLOAD
 ========================== */
@@ -174,7 +183,7 @@ function addMessage(text, type) {
     div.textContent = text;
 
     chatBox.appendChild(div);
-
+    saveCurrentChat();
     scrollToBottom();
 
 }
@@ -510,3 +519,124 @@ function copyCode(button) {
 
 window.startVoiceInput =
     startVoiceInput;  
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+if (menuBtn) {
+
+    menuBtn.addEventListener("click", () => {
+
+        sidebar.classList.toggle("open");
+
+    });
+
+}
+
+if (newChatBtn) {
+
+    newChatBtn.addEventListener("click", () => {
+
+        chatBox.innerHTML = "";
+
+        hero.style.display = "block";
+
+        memory.lastMessages = [];
+
+        saveMemory();
+
+        sidebar.classList.remove("open");
+
+    });
+
+}
+/* ==========================
+   CHAT HISTORY
+========================== */
+
+function saveCurrentChat() {
+
+    const messages = [];
+
+    document.querySelectorAll(".message").forEach(msg => {
+
+        messages.push({
+
+            text: msg.innerHTML,
+
+            type: msg.classList.contains("user")
+                ? "user"
+                : "ai"
+
+        });
+
+    });
+
+    if (messages.length === 0) return;
+
+    chats[0] = {
+
+        title: messages[0].text.replace(/<[^>]*>/g, "").substring(0, 30),
+
+        messages
+
+    };
+
+    localStorage.setItem(
+
+        "sageChats",
+
+        JSON.stringify(chats)
+
+    );
+
+    renderChatHistory();
+
+}
+
+function renderChatHistory() {
+
+    const history = document.getElementById("chatHistory");
+
+    history.innerHTML = "";
+
+    chats.forEach((chat, index) => {
+
+        const item = document.createElement("div");
+
+        item.className = "chat-item";
+
+        item.innerText = chat.title || "New Chat";
+
+        item.onclick = () => loadChat(index);
+
+        history.appendChild(item);
+
+    });
+
+}
+
+function loadChat(index) {
+
+    chatBox.innerHTML = "";
+
+    chats[index].messages.forEach(msg => {
+
+        const div = document.createElement("div");
+
+        div.className = "message " + msg.type;
+
+        div.innerHTML = msg.text;
+
+        chatBox.appendChild(div);
+
+    });
+
+    sidebar.classList.remove("open");
+
+    scrollToBottom();
+
+}
+
+renderChatHistory();
