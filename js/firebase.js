@@ -6,7 +6,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAY4zcI7_zOvcXH1kxQi-Uu0yvnVTmOE6g"
+  apiKey: "AIzaSyAY4zcI7_zOvcXH1kxQi-Uu0yvnVTmOE6g",
   authDomain: "sage-ai-1e078.firebaseapp.com",
   projectId: "sage-ai-1e078",
   storageBucket: "sage-ai-1e078.firebasestorage.app",
