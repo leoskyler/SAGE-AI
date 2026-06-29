@@ -299,22 +299,22 @@ Instructions:
 alert("Before fetch");
   
     const response =
-        await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-            {
-                method: "POST",
+    await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        {
+            method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-                body:
-                    JSON.stringify(body)
-            }
-        );
+            body: JSON.stringify(body)
+        }
+    );
+
+alert("After fetch");
+
 console.log("Status:", response.status);
-
 if (!response.ok) {
     const error = await response.text();
     console.log("Error:", error);
