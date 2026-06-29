@@ -322,7 +322,10 @@ if (!response.ok) {
     throw new Error(error);
 }
   
-    const data = await response.json();
+    const text = await response.text();
+alert(text);
+
+const data = JSON.parse(text);
 console.log(data);
 
     return (
