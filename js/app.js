@@ -318,7 +318,7 @@ alert("Status: " + response.status);
 console.log("Status:", response.status);
 if (!response.ok) {
     const error = await response.text();
-    console.log("Error:", error);
+    alert(error);
     throw new Error(error);
 }
   
