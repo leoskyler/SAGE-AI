@@ -398,19 +398,16 @@ async function sendMessage() {
     }
 
     catch (error) {
-
     console.error(error);
-
-    alert(error.message);
 
     loading.remove();
 
     addMessage(
-        "❌ " + error.message,
+        "❌ Failed to contact Gemini.",
         "ai"
     );
-
     }
+
 
 /* ==========================
    EVENTS
