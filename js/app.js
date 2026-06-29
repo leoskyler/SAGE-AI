@@ -256,7 +256,7 @@ function streamText(element, text, speed = 15) {
 async function generateReply(message) {
 
     const apiKey =
-        "AIzaSyAY4zcI7_zOvcXH1kxQi-Uu0yvnVTmOE6g";
+        "AQ.Ab8RN6KLHo4hDH21jlBkFId5Of21-NDgcMx12SYshJXldcRciA";
 
     const body = {
     contents: [
@@ -320,12 +320,8 @@ if (!response.ok) {
     throw new Error(error);
 }
   
-    const text = await response.text();
-
-alert("Status: " + response.status);
-alert(text);
-
-const data = JSON.parse(text);
+    const data = await response.json();
+console.log(data);
 
     return (
         data?.candidates?.[0]
@@ -406,6 +402,7 @@ async function sendMessage() {
         "❌ Failed to contact Gemini.",
         "ai"
     );
+    }
     }
 
 
