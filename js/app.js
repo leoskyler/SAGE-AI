@@ -320,10 +320,12 @@ if (!response.ok) {
     throw new Error(error);
 }
   
-    const data =
-        await response.json();
+    const text = await response.text();
 
-    console.log("Gemini response:", data);
+alert("Status: " + response.status);
+alert(text);
+
+const data = JSON.parse(text);
 
     return (
         data?.candidates?.[0]
