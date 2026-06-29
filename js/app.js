@@ -312,7 +312,14 @@ Instructions:
                     JSON.stringify(body)
             }
         );
+console.log("Status:", response.status);
 
+if (!response.ok) {
+    const error = await response.text();
+    console.log("Error:", error);
+    throw new Error(error);
+}
+  
     const data =
         await response.json();
 
