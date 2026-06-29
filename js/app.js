@@ -313,7 +313,8 @@ alert("Before fetch");
     );
 
 alert("After fetch");
-
+alert("Status: " + response.status);
+  
 console.log("Status:", response.status);
 if (!response.ok) {
     const error = await response.text();
