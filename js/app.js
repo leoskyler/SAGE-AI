@@ -257,7 +257,7 @@ async function generateReply(message) {
 
     const apiKey =
         "AQ.Ab8RN6JMkj9dX8OdySYQcZdI_CmiXVNPhRWAxUP0PeiwzmepDw";
-
+alert(apiKey);
     const body = {
     contents: [
         {
