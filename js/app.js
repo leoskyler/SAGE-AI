@@ -256,7 +256,7 @@ function streamText(element, text, speed = 15) {
 async function generateReply(message) {
 
     const apiKey =
-        "AQ.Ab8RN6JMkj9dX8OdySYQcZdI_CmiXVNPhRWAxUP0PeiwzmepDw";
+        "AQ.Ab8RN6L8Umame4qv226DmmYBkt9QNRGPOMa4I9hdgh1GoXWDmA";
 alert(apiKey);
     const body = {
     contents: [
